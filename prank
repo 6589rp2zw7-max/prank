@@ -1,0 +1,48 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "PrankAlert"
+gui.IgnoreGuiInset = true
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.fromScale(1, 1)
+frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+frame.BorderSizePixel = 0
+frame.Parent = gui
+
+local text = Instance.new("TextLabel")
+text.Size = UDim2.fromScale(1, 0.3)
+text.Position = UDim2.fromScale(0, 0.35)
+text.BackgroundTransparency = 1
+text.Text = "!! ВАШ АККАУНТ БЫЛ УКРАДЕН !!"
+text.TextColor3 = Color3.fromRGB(255, 0, 0)
+text.TextScaled = true
+text.Font = Enum.Font.GothamBold
+text.Parent = frame
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://9118823106"
+sound.Volume = 2
+sound.Looped = true
+sound.Parent = frame
+sound:Play()
+
+task.spawn(function()
+    for i = 1, 14 do
+        text.Visible = true
+        frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        task.wait(0.25)
+
+        text.Visible = false
+        frame.BackgroundColor3 = Color3.fromRGB(255, 210, 210)
+        task.wait(0.25)
+    end
+end)
+
+task.wait(7)
+
+sound:Stop()
+gui:Destroy()
